@@ -277,9 +277,85 @@ App.js
     );
   }
 ```
-Demo - 数据的双向绑定：修改学生姓名
-???????????????????做到这里?????????????????????????
+Demo1 - 数据的双向绑定：修改年级信息
+```javascript
+App.js
+1. 增加grade信息容器
+2. 增加输入行用于更新grade信息
+  class App extends Component {
+    state = {
+      students: [
+        { id: 1, name: "John", class: "class_A" },
+        { id: 2, name: "Steve", class: "class_C" },
+        { id: 3, name: "Trump", class: "class_A" },
+      ],
+      gradeInfo:"grade one"  
+    }
+    ...
+    changeGradeInfo = (event)=>{
+      this.setState({
+        gradeInfo:event.target.value
+      })
+    }
 
+    render() {
+      return (
+        <div className="App" htmlFor="html for for for demo">
+          <div>{this.state.gradeInfo}</div>
+          ...
+          <input type="text" onChange={ this.changeGradeInfo}></input>
+          <button onClick={this.changeStudent}>修改</button>
+        </div>
+      );
+    }
+  }
+```
+
+Demo2 - 修改学生姓名
+```javascript
+App.js
+class App extends Component {
+  ...
+  {/*需要注意下，最后一个参数是event，对应赋值绑定的地方第一个参数*/}
+  changeStudentTo = (id,event) => {
+    let students = this.state.students;
+    let index = students.findIndex(ent=>ent.id===id);
+    console.log(index);
+    let student = students[index];
+    student.name = event.target.value
+    students[index] = student;
+    this.setState({
+      students: students
+    });
+  }
+
+  render() {
+    return (
+      <div className="App" htmlFor="html for for for demo">
+        <div>{this.state.gradeInfo}</div>
+        <Student id={this.state.students[0].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[0].name} class={this.state.students[0].class} />
+        <Student id={this.state.students[1].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[1].name} class={this.state.students[1].class} />
+        <Student id={this.state.students[2].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[2].name} class={this.state.students[2].class} />
+        <input type="text" onChange={ this.changeGradeInfo}></input>
+        <button onClick={this.changeStudent}>修改</button>
+      </div>
+    );
+  }
+}
+```
+```javascript
+Student.js
+  import React from 'react'
+  function student(props) {
+      return (
+          <div>
+              <div>大家好，我是学生：{props.name},班级：{props.class}</div>
+              <input type="text" onChange={props.onChangeStudentTo.bind(this, props.id)} />
+          </div>);
+  }
+  export default student;
+```
+>这里需要注意下，react的event和我们平时认为的JS的event不一样，相关文档见此： https://reactjs.org/docs/events.html
 - 什么时候用 state？
     - 需要动态改变组建内值的时候
     - 需要使用组件的生命周期函数的时候
