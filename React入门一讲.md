@@ -359,3 +359,36 @@ Student.js
 - 什么时候用 state？
     - 需要动态改变组建内值的时候
     - 需要使用组件的生命周期函数的时候
+
+# 6. React中的样式
+## 6.1 - 通过 import 导入样式
+在Student.js同级目录创建Student.css
+```css
+Student.css
+  div{
+      color:blue;
+  }
+```
+在Student.js中使用该样式
+```javascript
+  import './Student.css'
+```
+## 6.2 - 直接在组建中定义样式
+```javascript
+Student.js
+  import React from 'react'
+  var myStyle = {
+      color:"orange",
+      fontSize:"22px"
+  }
+
+  function student(props) {
+
+      return (
+          <div>
+              <div style={myStyle}>大家好，我是学生：{props.name},班级：{props.class}</div>
+              <input type="text" onChange={props.onChangeStudentTo.bind(this,props.id)}></input>
+          </div>);
+  }
+  export default student;
+```
