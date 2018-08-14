@@ -1,10 +1,10 @@
-import React from  'react' //如果要用到JSX语法，就需要导入react
-import './Student.css';
-var myStyle = {
-    "fontSize":"22px",
-    "color":"black"
+import React from 'react'
+function student(props) {
+    return (
+        <div>
+            <div>大家好，我是学生：{props.name},班级：{props.class}</div>
+            <input type="text" onKeyUp="" />？？？？？？？？？？？？？？
+        </div>);
 }
-function Student(){
-    return <p style={myStyle}>大家好，我是学生A</p> //JSX
-}
-export default Student;
+
+export default student;
