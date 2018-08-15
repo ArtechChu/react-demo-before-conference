@@ -373,7 +373,7 @@ Student.css
 ```javascript
   import './Student.css'
 ```
-## 6.2 - 直接在组建中定义样式
+## 6.2 - 直接在组件中定义样式
 ```javascript
 Student.js
   import React from 'react'
@@ -392,3 +392,68 @@ Student.js
   }
   export default student;
 ```
+
+# 7. 流程控制语句
+## 7.1 - 条件判断语句
+- 一种是在JSX中使用三元表达式
+  ```html
+  JSX语法
+          <div>{this.state.isShowGradeInfo?this.state.gradeInfo:""}</div>
+  ```
+- 一种是在JSX语法外，先把需要判断的东西计算出结果后，直接使用结果
+  ```javascript
+  render() {
+    let gradeInfo = null;
+    if(this.state.isShowGradeInfo){
+      gradeInfo = this.state.gradeInfo;
+    }
+    return (
+      <div className="App" htmlFor="html for for for demo">
+        ...
+        <div>{gradeInfo}</div>
+        ...
+      </div>
+    );
+  }
+  ```
+## 7.2 - 循环语句
+- 一种是常规的for循环
+  ```javascript
+  render() {
+    ...
+    var studentArray = [];
+    for(let i=0;i<this.state.students.length;i++){        
+        studentArray.push(<Student id={this.state.students[i].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[i].name} class={this.state.students[i].class} />)
+    }
+    return (
+      <div className="App" htmlFor="html for for for demo">
+        ...
+        {/* {studentArray} */}
+        {this.state.students.map(student=>{
+          return <Student id={student.id} onChangeStudentTo={this.changeStudentTo} name={student.name} class={student.class} />
+        })}
+        ...
+      </div>
+    );
+  }
+  ```
+- 一种是使用map方法（推荐）
+- ```javascript
+  render() {
+    ...
+
+    return (
+      <div className="App" htmlFor="html for for for demo">
+        ...
+        {
+          this.state.students.map(student=>{
+          return <Student id={student.id} onChangeStudentTo={this.changeStudentTo} name={student.name} class={student.class} />
+          });
+        }
+        ...
+      </div>
+    );
+  }
+  ```
+
+  [toc]

@@ -11,7 +11,8 @@ class App extends Component {
       { id: 2, name: "Steve", class: "class_C" },
       { id: 3, name: "Trump", class: "class_A" },
     ],
-    gradeInfo:"grade one"
+    gradeInfo:"grade one",
+    isShowGradeInfo:true
   }
   sayHello = () => {
     alert("hello");
@@ -49,12 +50,26 @@ class App extends Component {
   }
 
   render() {
+    let gradeInfo = null;
+    if(this.state.isShowGradeInfo){
+      gradeInfo = this.state.gradeInfo;
+    }
+    var studentArray = [];
+    for(let i=0;i<this.state.students.length;i++){        
+        studentArray.push(<Student id={this.state.students[i].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[i].name} class={this.state.students[i].class} />)
+    }
     return (
       <div className="App" htmlFor="html for for for demo">
-        <div>{this.state.gradeInfo}</div>
-        <Student id={this.state.students[0].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[0].name} class={this.state.students[0].class} />
+
+        <div>{gradeInfo}</div>
+
+        {/* <Student id={this.state.students[0].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[0].name} class={this.state.students[0].class} />
         <Student id={this.state.students[1].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[1].name} class={this.state.students[1].class} />
-        <Student id={this.state.students[2].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[2].name} class={this.state.students[2].class} />
+        <Student id={this.state.students[2].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[2].name} class={this.state.students[2].class} /> */}
+        {/* {studentArray} */}
+        {this.state.students.map(student=>{
+          return <Student id={student.id} onChangeStudentTo={this.changeStudentTo} name={student.name} class={student.class} />
+        })}
         <input type="text" onChange={ this.changeGradeInfo}></input>
         <button onClick={this.changeStudent}>修改</button>
       </div>
