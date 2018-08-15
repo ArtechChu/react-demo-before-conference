@@ -317,8 +317,7 @@ Demo2 - 修改学生姓名
 App.js
 class App extends Component {
   ...
-  {/*需要注意下，最后一个参数是event，对应赋值绑定的地方第一个参数*/}
-  changeStudentTo = (id,event) => {
+  changeStudentTo = (event,id) => {
     let students = this.state.students;
     let index = students.findIndex(ent=>ent.id===id);
     console.log(index);
@@ -351,7 +350,7 @@ Student.js
       return (
           <div>
               <div>大家好，我是学生：{props.name},班级：{props.class}</div>
-              <input type="text" onChange={props.onChangeStudentTo.bind(this, props.id)} />
+              <input type="text" onChange={(e)=>props.onChangeStudentTo(e, props.id)} />
           </div>);
   }
   export default student;

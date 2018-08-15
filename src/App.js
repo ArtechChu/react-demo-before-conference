@@ -31,23 +31,28 @@ class App extends Component {
     });
   }
 
-  changeStudentTo = (id,event) => {
+  changeStudentTo = (id,e1) => {
 
     let students = this.state.students;
     let index = students.findIndex(ent=>ent.id===id);
     console.log(index);
     let student = students[index];
-    student.name = event.target.value
+    student.name = e1.target.value
     students[index] = student;
     this.setState({
       students: students
     });
   }
-  changeGradeInfo = (event)=>{
+
+
+
+  changeGradeInfo = (e)=>{
     this.setState({
-      gradeInfo:event.target.value
+      gradeInfo:e.target.value
     })
   }
+
+
 
   render() {
     let gradeInfo = null;
@@ -63,9 +68,6 @@ class App extends Component {
 
         <div>{gradeInfo}</div>
 
-        {/* <Student id={this.state.students[0].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[0].name} class={this.state.students[0].class} />
-        <Student id={this.state.students[1].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[1].name} class={this.state.students[1].class} />
-        <Student id={this.state.students[2].id} onChangeStudentTo={this.changeStudentTo} name={this.state.students[2].name} class={this.state.students[2].class} /> */}
         {/* {studentArray} */}
         {this.state.students.map(student=>{
           return <Student id={student.id} onChangeStudentTo={this.changeStudentTo} name={student.name} class={student.class} />
@@ -75,8 +77,6 @@ class App extends Component {
       </div>
     );
   }
-
-
 }
 
 
