@@ -6,7 +6,8 @@ react 官网：https://reactjs.org/
 - react：16.4.2
 - npm：6.2.0
 - SPA（单页应用）
-
+  
+[toc]
 # 1. 创建项目
 ## 1.1 - 安装脚手架create-react-app
 ```javascript
@@ -455,5 +456,3 @@ Student.js
     );
   }
   ```
-
-  [toc]
